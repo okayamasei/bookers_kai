@@ -13,5 +13,24 @@
     <h2>Books</h2>
 
     <%= render 'books/index',books: @books %>
+
   </div>
+  <% if @user == current_user %>
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVltDMH3hCX_yD5XRLg83XIp3mhbsZYT4&callback=initMap"></script>
+  <script>
+    function initMap() {
+      var mapPosition = new google.maps.LatLng(current_user.latitude, current_user.longitude);//緯度経度
+      var map = new google.maps.Map(document.getElementById('gmap'), {
+      zoom: 17,//ズーム
+      center: mapPosition
+    });
+      var marker = new google.maps.Marker({
+      position: mapPosition,
+      map: map
+      });
+    }
+  </script>
+  <div id="gmap"></div>
+
+  <% end %>
 </div>
